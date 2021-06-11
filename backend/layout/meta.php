@@ -1,0 +1,2 @@
+<meta  name="keywork"  content="cho tot, tiki, san pham,...">
+<meta  name="description"  content="Chợ Tốt - Website mua bán rao vặt của người Việt với hàng ngàn món hời đang được rao bán mỗi ngày. Đăng tin mua bán UY TÍN, NHANH CHÓNG, AN TOÀN.,...">
