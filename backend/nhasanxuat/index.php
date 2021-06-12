@@ -46,43 +46,43 @@ div{
        
 
         <div class="col-md-9">
-           <?php
+        <?php
              include_once __DIR__.'/../../connect.php';
-             $sql="SELECT * FROM loaisanpham";
+             $sql="SELECT * FROM nhasanxuat";
              $result=mysqli_query($conn,$sql);
             $data=[];
             while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 $data[]= array(
-                    'lsp_ma' => $row['lsp_ma'],
-                    'lsp_ten' => $row['lsp_ten']
+                    'nsx_ma' => $row['nsx_ma'],
+                    'nsx_ten' => $row['nsx_ten']
 
                 );
             }
 
+            
             ?>
-            <a class="btn btn-primary" href="create.php">Thêm sản phẩm</a>
-            <table class="table table-bordered">
-            <tr>
-            <th>Mã sản phẩm</th>
-            <th>Tên sản phẩm</th>
-            <th>Action</th>
-            
-            </tr>
-            <?php foreach($data as $lsp): ?>
-            <tr>
-            <td><?= $lsp['lsp_ma']   ?></td>
-            <td><?= $lsp['lsp_ten']   ?></td>
-            <td><a class="btn btn-primary" href="edit.php">Sua</a>
-            <a class="btn btn-danger" href="delete.php?lsp_ma=<?=$lsp['lsp_ma']?>">Xoa</a></td>
-            </tr>
-            <?php endforeach; ?>
-
-            
-            
-            
-            </table>
-        </div>
+            <a class="btn btn-primary" href="create.php">Thêm mới NSX</a>
+             <table class="table table-bordered">
         
+                <tr>
+                    <th>Mã số</th>
+                    <th>Tên NSX</th>
+                    <th>Action</th>
+                </tr>
+                <?php foreach($data as $nsx): ?>
+                <tr>
+                    <td><?= $nsx['nsx_ma'] ?></td>
+                    <td><?= $nsx['nsx_ten'] ?></td>
+                    <td>
+                        <a class="btn btn-danger" href="delete.php?nsx_ma=<?= $nsx['nsx_ma']  ?>">Xoa</a>
+                        <a href="edit.php?nsx_ma=<?= $nsx['nsx_ma']    ?>" class="btn btn-primary">Sua</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+        
+             </table>
+        </div>
+       
          <!-- main-end -->
 
 

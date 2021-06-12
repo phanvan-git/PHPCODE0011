@@ -65,10 +65,7 @@ div{
             $lsp_ten=$_POST['lsp_ten'];
             $sql="INSERT INTO loaisanpham(lsp_ten)VALUES ('$lsp_ten')";
             mysqli_query($conn,$sql);
-
-
-
-            echo('<script>location:href="index.php";</script>');
+            header("location:index.php");
            }
 
             ?>

@@ -11,12 +11,12 @@
 
     ?>
    <!-- dinh dang cho toan he thong end -->
-   <!-- dinh dang cho toan he thong start -->
+   <!-- dinh dang cho toan he thong meta start -->
    <?php
     include_once __DIR__.'/../layout/meta.php';
 
     ?>
-   <!-- dinh dang cho toan he thong end -->
+   <!-- dinh dang cho toan he thong meta end -->
 <style>
 
 div{
@@ -43,19 +43,36 @@ div{
         ?>
         <!-- slidebar-end -->
         <!-- main-start -->
+       
+
         <div class="col-md-9">
         <?php
+        ini_set('display_errors',1);
         include_once __DIR__.'/../../connect.php';
-        $sql="DELETE FROM loaisanpham WHERE lsp_ma='$_GET[lsp_ma]' ";
-        mysqli_query($conn,$sql);
-        header("location:index.php");
+
+
+
+        $nsx_id=$_GET['nsx_id'];
+        $sqlselect="SELECT * FROM nhasanxuat WHERE nsx_id=$nsx_id;";
+        $resultselect=mysqli_query($conn,$sqlselect);
+      //  $nhasanxuat= mysqli_fetch_array($resultselect,MYSQLI_ASSOC);
+
+       // header("location:index.php");
+
+
+        
+
 
 
 
         ?>
 
-           
+
+
+
+
         </div>
+       
          <!-- main-end -->
 
 

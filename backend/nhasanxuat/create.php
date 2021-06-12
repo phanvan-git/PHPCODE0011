@@ -11,12 +11,12 @@
 
     ?>
    <!-- dinh dang cho toan he thong end -->
-   <!-- dinh dang cho toan he thong start -->
+   <!-- dinh dang cho toan he thong meta start -->
    <?php
     include_once __DIR__.'/../layout/meta.php';
 
     ?>
-   <!-- dinh dang cho toan he thong end -->
+   <!-- dinh dang cho toan he thong meta end -->
 <style>
 
 div{
@@ -43,19 +43,44 @@ div{
         ?>
         <!-- slidebar-end -->
         <!-- main-start -->
+       
+
         <div class="col-md-9">
+        <form action="" method="post">
+        
+        <div class="form-group">
+            <label for="exampleInputEmail1">Thêm nhà sx</label>
+            <input type="text" class="form-control" name="nsx_ten" aria-describedby="emailHelp">
+          
+        </div>
+        <button class="btn btn-primary" name="btnnsx">Thêm</button>
+        
+        
+        </form>
         <?php
-        include_once __DIR__.'/../../connect.php';
-        $sql="DELETE FROM loaisanpham WHERE lsp_ma='$_GET[lsp_ma]' ";
-        mysqli_query($conn,$sql);
-        header("location:index.php");
+         include_once __DIR__.'/../../connect.php';
+        if(isset($_POST['btnnsx'])){
+
+            $nsx_ten=$_POST['nsx_ten'];
+            $sql="INSERT INTO nhasanxuat(nsx_ten)VALUES('$nsx_ten')";
+            mysqli_query($conn,$sql);
+            header("location:index.php");
+
+
+
+        }
+
 
 
 
         ?>
 
-           
+
+
+
+
         </div>
+       
          <!-- main-end -->
 
 

@@ -11,12 +11,12 @@
 
     ?>
    <!-- dinh dang cho toan he thong end -->
-   <!-- dinh dang cho toan he thong start -->
+   <!-- dinh dang cho toan he thong meta start -->
    <?php
     include_once __DIR__.'/../layout/meta.php';
 
     ?>
-   <!-- dinh dang cho toan he thong end -->
+   <!-- dinh dang cho toan he thong meta end -->
 <style>
 
 div{
@@ -43,19 +43,21 @@ div{
         ?>
         <!-- slidebar-end -->
         <!-- main-start -->
+       
+
         <div class="col-md-9">
-        <?php
+       
+       <?php
         include_once __DIR__.'/../../connect.php';
-        $sql="DELETE FROM loaisanpham WHERE lsp_ma='$_GET[lsp_ma]' ";
+       
+        $sql="DELETE FROM nhasanxuat WHERE nsx_ma='$_GET[nsx_ma]'";
         mysqli_query($conn,$sql);
         header("location:index.php");
 
-
-
         ?>
 
-           
         </div>
+       
          <!-- main-end -->
 
 
