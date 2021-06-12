@@ -72,7 +72,7 @@ div{
             <tr>
             <td><?= $lsp['httt_ma']   ?></td>
             <td><?= $lsp['httt_ten']   ?></td>
-            <td><a class="btn btn-primary" href="edit.php">Sua</a>
+            <td><a class="btn btn-primary" href="edit.php?httt_ma=<?= $lsp['httt_ma']?>">Sua</a>
             <a class="btn btn-danger" href="delete.php?httt_ma=<?=$lsp['httt_ma']    ?>">Xoa</a></td>
             </tr>
             <?php endforeach; ?>

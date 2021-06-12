@@ -47,21 +47,41 @@ div{
 
         <div class="col-md-9">
         <?php
-        ini_set('display_errors',1);
+   
         include_once __DIR__.'/../../connect.php';
 
-
-
-        $nsx_id=$_GET['nsx_id'];
-        $sqlselect="SELECT * FROM nhasanxuat WHERE nsx_id=$nsx_id;";
+        $nsx_ma=$_GET['nsx_ma'];
+        $sqlselect="SELECT * FROM nhasanxuat WHERE nsx_ma=$nsx_ma;";
         $resultselect=mysqli_query($conn,$sqlselect);
-      //  $nhasanxuat= mysqli_fetch_array($resultselect,MYSQLI_ASSOC);
+        $nhasanxuat= mysqli_fetch_array($resultselect,MYSQLI_ASSOC);
 
-       // header("location:index.php");
-
-
+        ?>
+        <form action="" method="post">
         
+        <div class="form-group">
+            <label for="exampleInputEmail1">Mã</label>
+            <input type="text" class="form-control" name="nsx_ma" aria-describedby="emailHelp" value="<?=$nhasanxuat['nsx_ma']   ?>">
+            <label for="exampleInputEmail1">Tên nhà sản xuất</label>
+            <input type="text" class="form-control" name="nsx_ten" aria-describedby="emailHelp" value="<?=$nhasanxuat['nsx_ten']   ?>">
+          
+        </div>
+        <button class="btn btn-primary" name="btnnsx">Thêm</button>
+        
+        
+        </form>
+        <?php
 
+            if(isset($_POST['btnnsx'])){
+                $nsx_ma=$_POST['nsx_ma'];
+                $nsx_ten=$_POST['nsx_ten'];
+                $sqlupdate="UPDATE nhasanxuat SET nsx_ten='$nsx_ten' WHERE nsx_ma='$nsx_ma'";
+                mysqli_query($conn,$sqlupdate);
+                echo'<script>location.href="index.php";</script>';
+
+
+
+
+            }
 
 
 
