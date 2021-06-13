@@ -48,13 +48,14 @@ div{
         <div class="col-md-9 ">
        
        <?php
-        
-        
-        include_once __DIR__.'/../../connect.php';
-       
-        $sql="DELETE FROM nhasanxuat WHERE nsx_ma='$_GET[nsx_ma]'";
-        mysqli_query($conn,$sql);
-        header("location:index.php");
+        include_once __DIR__ .'/../../connect.php';
+        $id=$_GET['id'];
+        $sqldelete=<<<EOT
+        DELETE FROM nhasanxuat WHERE nsx_ma=$id;
+
+EOT;        
+       mysqli_query($conn,$sqldelete);
+       echo'<script>location.href="index.php"</script>';
 
         ?>
 

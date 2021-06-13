@@ -54,7 +54,8 @@ div{
             while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 $data[]= array(
                     'lsp_ma' => $row['lsp_ma'],
-                    'lsp_ten' => $row['lsp_ten']
+                    'lsp_ten' => $row['lsp_ten'],
+                    'lsp_mota' =>$row['lsp_mota']
 
                 );
             }
@@ -65,6 +66,7 @@ div{
             <tr>
             <th>Mã sản phẩm</th>
             <th>Tên sản phẩm</th>
+            <th>Mô tả</th>
             <th>Action</th>
             
             </tr>
@@ -72,8 +74,9 @@ div{
             <tr>
             <td><?= $lsp['lsp_ma']   ?></td>
             <td><?= $lsp['lsp_ten']   ?></td>
-            <td><a class="btn btn-primary" href="edit.php?lsp_ma=<?= $lsp['lsp_ma']   ?>">Sua</a>
-            <a class="btn btn-danger" href="delete.php?lsp_ma=<?=$lsp['lsp_ma']?>">Xoa</a></td>
+            <td><?= $lsp['lsp_mota']   ?></td>
+            <td><a class="btn btn-primary" href="edit.php?id=<?=$lsp['lsp_ma']   ?>">Sua</a>
+            <a class="btn btn-danger" href="delete.php?id=<?=$lsp['lsp_ma']  ?>">Xoa</a></td>
             </tr>
             <?php endforeach; ?>
 

@@ -50,44 +50,53 @@ div{
    
         include_once __DIR__.'/../../connect.php';
 
-        $lsp_ma=$_GET['lsp_ma'];
-        $sqlselect="SELECT * FROM loaisanpham WHERE lsp_ma=$lsp_ma;";
-        $resultselect=mysqli_query($conn,$sqlselect);
-        $loaisanpham= mysqli_fetch_array($resultselect,MYSQLI_ASSOC);
+        $id=$_GET['id'];
+        $sqledit=<<<EOT
+        SELECT * FROM loaisanpham WHERE lsp_ma=$id;
+
+
+EOT;
+        $resultedit=mysqli_query($conn,$sqledit);
+        $rowedit=mysqli_fetch_array($resultedit,MYSQLI_ASSOC);
+       
 
         ?>
-        <form action="" method="post">
-        
-        <div class="form-group">
-            <label for="exampleInputEmail1">Mã</label>
-            <input type="text" class="form-control" name="lsp_ma" aria-describedby="emailHelp" value="<?=$loaisanpham['lsp_ma']   ?>">
-            <label for="exampleInputEmail1">Loại sản phẩm</label>
-            <input type="text" class="form-control" name="lsp_ten" aria-describedby="emailHelp" value="<?=$loaisanpham['lsp_ten']   ?>">
-          
-        </div>
-        <button class="btn btn-primary" name="btnnsx">Thêm</button>
-        
-        
-        </form>
+        <form action="" name="fromadd" method="post">
+             
+            <div class="form-group">
+            <label for="exampleInputEmail1">Edit mã</label>
+            <input type="text" class="form-control" id="lsp_ma" aria-describedby="emailHelp" name="lsp_ma" value="<?=$rowedit['lsp_ma']   ?>">
+            </div>
+            <div class="form-group">
+            <label for="exampleInputEmail1">Edit tên</label>
+            <input type="text" class="form-control" id="lsp_ten" aria-describedby="emailHelp" name="lsp_ten" value="<?=$rowedit['lsp_ten']   ?>">
+            </div>
+            <div class="form-group">
+            <label for="exampleInputEmail1">Edit mô tả</label>
+            <textarea class="form-control" name="lsp_mota" "><?=$rowedit['lsp_mota']   ?> </textarea>
+            </div>
+            <button class="btn btn-primary" name="btnlsp">Thêm LSP</button>
+             
+         </form>
+
         <?php
+        if(isset($_POST['btnlsp'])){
+            $lsp_ma=$_POST['lsp_ma'];
+            $lsp_ten=$_POST['lsp_ten'];
+            $lsp_mota=$_POST['lsp_mota'];
+            $sqlupdate=<<<EOT
+            UPDATE loaisanpham
+            SET lsp_ten='$lsp_ten',lsp_mota='$lsp_mota'
+            WHERE lsp_ma='$lsp_ma'
 
-            if(isset($_POST['btnnsx'])){
-                $lsp_ma=$_POST['lsp_ma'];
-                $lsp_ten=$_POST['lsp_ten'];
-                $sqlupdate="UPDATE loaisanpham SET lsp_ten='$lsp_ten' WHERE lsp_ma='$lsp_ma'";
-                mysqli_query($conn,$sqlupdate);
-                echo'<script>location.href="index.php";</script>';
 
-
-
-
-            }
-
+EOT;
+            mysqli_query($conn,$sqlupdate);
+            echo'<script>location.href="index.php"</script>';
+        }
 
 
         ?>
-
-
 
 
 

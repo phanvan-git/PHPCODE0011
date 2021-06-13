@@ -74,8 +74,8 @@ div{
                     <td><?= $nsx['nsx_ma'] ?></td>
                     <td><?= $nsx['nsx_ten'] ?></td>
                     <td>
-                        <a class="btn btn-danger" href="delete.php?nsx_ma=<?= $nsx['nsx_ma']  ?>">Xoa</a>
-                        <a href="edit.php?nsx_ma=<?= $nsx['nsx_ma']?>" class="btn btn-primary">Sua</a>
+                        <a class="btn btn-danger" href="delete.php?id=<?=$nsx['nsx_ma']?>">Xoa</a>
+                        <a href="edit.php?id=<?=$nsx['nsx_ma']?>" class="btn btn-primary">Sua</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

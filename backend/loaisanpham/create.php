@@ -54,6 +54,11 @@ div{
             <input type="text" class="form-control" id="lsp_ten" aria-describedby="emailHelp" name="lsp_ten">
            
             </div>
+             <div class="form-group">
+            <label for="exampleInputEmail1">Mô ta</label>
+            <textarea class="form-control" id="lsp_ten"  name="lsp_ten"> </textarea>
+           
+            </div>
             <button class="btn btn-primary" name="btnlsp">Thêm LSP</button>
              
              </form>

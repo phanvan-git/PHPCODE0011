@@ -45,10 +45,15 @@ div{
         <!-- main-start -->
         <div class="col-md-9">
         <?php
-        include_once __DIR__.'/../../connect.php';
-        $sql="DELETE FROM loaisanpham WHERE lsp_ma='$_GET[lsp_ma]' ";
-        mysqli_query($conn,$sql);
-        header("location:index.php");
+        include_once __DIR__ .'/../../connect.php';
+        $id=$_GET['id'];
+        $sqldelete=<<<EOT
+        DELETE FROM loaisanpham WHERE lsp_ma=$id;
+
+
+EOT;
+        mysqli_query($conn,$sqldelete);
+        echo('<script>location.href="index.php"</script>');
 
 
 
