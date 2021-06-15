@@ -45,42 +45,20 @@ div{
         <!-- main-start -->
        
 
-        <div class="col-md-9">
-        <?php
-             include_once __DIR__.'/../../connect.php';
-             $sql="SELECT * FROM nhasanxuat";
-             $result=mysqli_query($conn,$sql);
-            $data=[];
-            while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                $data[]= array(
-                    'nsx_ma' => $row['nsx_ma'],
-                    'nsx_ten' => $row['nsx_ten']
+        <div class="col-md-9 ">
+       
+       <?php
+        include_once __DIR__ .'/../../connect.php';
+        $id=$_GET['id'];
+        $sqldelete=<<<EOT
+        DELETE FROM nhasanxuat WHERE nsx_ma=$id;
 
-                );
-            }
+EOT;        
+       mysqli_query($conn,$sqldelete);
+       echo'<script>location.href="index.php"</script>';
 
-            
-            ?>
-            <a class="btn btn-primary" href="create.php">Thêm mới NSX</a>
-             <table class="table table-bordered">
-        
-                <tr class="text-center">
-                    <th>Mã số</th>
-                    <th>Tên NSX</th>
-                    <th>Action</th>
-                </tr>
-                <?php foreach($data as $nsx): ?>
-                <tr class="text-center">
-                    <td><?= $nsx['nsx_ma'] ?></td>
-                    <td><?= $nsx['nsx_ten'] ?></td>
-                    <td>
-                        <a class="btn btn-danger" href="delete.php?id=<?=$nsx['nsx_ma']?>">Xoa</a>
-                        <a href="edit.php?id=<?=$nsx['nsx_ma']?>" class="btn btn-primary">Sua</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-        
-             </table>
+        ?>
+
         </div>
        
          <!-- main-end -->
