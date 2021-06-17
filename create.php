@@ -11,12 +11,12 @@
 
     ?>
    <!-- dinh dang cho toan he thong end -->
-   <!-- dinh dang cho toan he thong meta start -->
+   <!-- dinh dang cho toan he thong start -->
    <?php
     include_once __DIR__.'/../layout/meta.php';
 
     ?>
-   <!-- dinh dang cho toan he thong meta end -->
+   <!-- dinh dang cho toan he thong end -->
 <style>
 
 div{
@@ -43,108 +43,119 @@ div{
         ?>
         <!-- slidebar-end -->
         <!-- main-start -->
-       
-
         <div class="col-md-9">
-        <form action="" method="post" id="frmcreate">
         
-        <div class="form-group">
-            <label for="exampleInputEmail1">Thêm nhà sx</label>
-            <input type="text" class="form-control" name="nsx_ten" aria-describedby="emailHelp">
-          
-        </div>
-        <button class="btn btn-primary" name="btnnsx">Thêm</button>
-        
-        
-        </form>
-        <?php
-         include_once __DIR__.'/../../connect.php';
-        if(isset($_POST['btnnsx'])){
-
-            $nsx_ten=$_POST['nsx_ten'];
-            $erorrs=[];
-           
-            if(empty($nsx_ten)){
-                $erorrs['$nsx_ten'][]=[
-                    'rule' => 'required',
-                    'rule_value'    => true,
-                    'value' => $nsx_ten,
-                    'msg'   => 'Vui long nhap ten nha san xuat'
-                ];
-            }
-            // min
-            if(!empty($nsx_ten) && strlen($nsx_ten)<3){
-                $erorrs['nsx_ten'][]=[
-                    'rule' => 'minlength',
-                    'rule_value'    => 3,
-                    'value' => $nsx_ten,
-                    'msg'   => 'Vui long khong nhap it hon 3 ky tu'
 
 
+             <?php
+             include_once __DIR__.'/../../connect.php';
+             $sqlloaisp="SELECT * FROM loaisanpham";
+             $resultlsp=mysqli_query($conn,$sqlloaisp);
+            $dataloaisp=[];
+            while($row=mysqli_fetch_array($resultlsp, MYSQLI_ASSOC)){
+                $dataloaisp[]= array(
+                    'lsp_ma' => $row['lsp_ma'],
+                    'lsp_ten' => $row['lsp_ten'],
+                   
 
-
-                ];
-            }
-            // max
-            if(!empty($nsx_ten) && strlen($nsx_ten)>50){
-                $erorrs['nsx_ten'][]=[
-                    'rule' => 'maxlength',
-                    'rule_value'    => 50,
-                    'value' => $nsx_ten,
-                    'msg'   => 'Vui long nhập không quá 50 ký tự'
-
-
-                ];
-
-
+                );
             }
 
-            if(empty($erorrs)){
-                $sql="INSERT INTO nhasanxuat(nsx_ten)VALUES('$nsx_ten')";
-                mysqli_query($conn,$sql);
-                header("location:index.php");
-            }
+            ?>
 
 
-           
 
+             <form action="" name="fromadd" method="post">
+             
+             <div class="form-group">
+                <label for="exampleInputEmail1">Sản Phẩm mã</label>
+                <input type="text" class="form-control" id="sp_ma" aria-describedby="emailHelp" name="sp_ma">
             
+            </div>
+             <div class="form-group">
+                <label for="exampleInputEmail1">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="sp_ten" aria-describedby="emailHelp" name="sp_ten">
+            
+            </div>
+             <div class="form-group">
+                <label for="exampleInputEmail1">Gía sản phẩm</label>
+                <input type="text" class="form-control" id="sp_gia" aria-describedby="emailHelp" name="sp_gia">
+            
+            </div>
+             <div class="form-group">
+                <label for="exampleInputEmail1">Gía cũ sản phẩm</label>
+                <input type="text" class="form-control" id="sp_giacu" aria-describedby="emailHelp" name="sp_giacu">
+            
+            </div>
+             <div class="form-group">
+                <label for="exampleInputEmail1">Sản phẩm ô tả ngắn</label>
+                <textarea class="form-control" id="sp_motangan"  name="sp_motangan"> </textarea>
+            
+            </div>
+             <div class="form-group">
+                <label for="exampleInputEmail1">Sản phẩm ô tả chi tiết</label>
+                <textarea class="form-control" id="sp_mota_chitiet"  name="sp_mota_chitiet"> </textarea>
+            
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ngày cập nhật sản phẩm</label>
+                <input type="text" class="form-control" id=" sp_ngaycapnhat" aria-describedby="emailHelp" name=" sp_ngaycapnhat">
+            
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Số lượng sản phẩm</label>
+                <input type="text" class="form-control" id="sp_soluong" aria-describedby="emailHelp" name="sp_soluong">
+            
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Loại sản phẩm</label>
+ 
+                <select name="lsp_ma" id="lsp_ma" class="form-control">
+                <?php foreach($dataloaisp as $lsp):   ?>
+                <option value="<?php $lsp['lsp_ma'] ?>"> <?=  $lsp['lsp_ten']  ?></option>
+
+
+                <?php endforeach;  ?>
+
+                </select>
+                
+             
+            
+            </div>
+            <button class="btn btn-primary" name="btnsp">Thêm LSP</button>
+             
+             </form>
+
+           <?php
             
 
-
-
-        }
-
-
-
-
-        ?>
-        <?php  if(!empty($erorrs)):   ?>
-         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-               
-               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-               </button>
-            <ul>
-              <?php foreach($erorrs as $field):    ?>
-
-                    <?php foreach($field as $rule):    ?>
-                    
-                        <li><?= $rule['msg']  ?></li>
-                    
-
-                    <?php endforeach;  ?>
-              <?php endforeach;  ?>
-            </ul>
-           </div>
-        <?php  endif;  ?>
+           if(isset($_POST['btnsp'])){
+            
+            $sp_ten=$_POST['sp_ten'];
+            $sp_gia=$_POST['sp_gia'];
+            $sp_giacu=$_POST['sp_giacu'];
+            $sp_motangan=$_POST['sp_motangan'];
+            $sp_mota_chitiet=$_POST['sp_mota_chitiet'];
+            $sp_ngaycapnhat=$_POST['sp_ngaycapnhat'];
+            $sp_soluong=$_POST['sp_soluong'];
+            $lsp_ma=$_POST['lsp_ma'];
+            $nsx_ma=NULL;
+            $km_ma=NULL;
+            $sqlsp=<<<EOT
+            INSERT INTO sanpham
+            ( sp_ten, sp_gia, sp_giacu, sp_mota_ngan, sp_mota_chitiet, sp_ngaycapnhat, sp_soluong, lsp_ma, nsx_ma, km_ma)
+            VALUES ( $sp_ten, $sp_gia,$sp_giacu,$sp_motangan, $sp_mota_chitiet, $sp_ngaycapnhat, $sp_soluong,$lsp_ma, $nsx_ma,$km_ma)
 
 
 
+EOT;
+            mysqli_query($conn,$sqlsp);
+            echo '<script>location.href="index.php</script>';
+           }
 
-
+            ?>
+           
         </div>
-       
          <!-- main-end -->
 
 
@@ -175,67 +186,7 @@ div{
 ?>
    <!-- dinh dang cho toan he thong end -->
 
-<script>
 
-// $(function(){
-//     $('#frmcreate').validate({
-//         rules:{
-//             nsx_ten:{
-//                 required:true,
-//                 minlength:3,
-//                 maxlength:50
-//             }
-           
-
-
-
-//         },
-//         messages:{
-//            nsx_ten:{
-//             required: "Vui lòng nhập thông tin nhà sản xuất",
-//             minlength: "Vui long nhập ít nhất 3 ký tự",
-//             maxlength: "Vui lòng không nhập không quá 50 ký tự"
-//            }
-
-
-
-
-//         },
-//         errorElement: "em",
-//         errorPlacement: function(error, element) {
-//             // Thêm class `invalid-feedback` cho field đang có lỗi
-//             error.addClass("invalid-feedback");
-//             if (element.prop("type") === "checkbox") {
-//             error.insertAfter(element.parent("label"));
-//             } else {
-//             error.insertAfter(element);
-//             }
-//         },
-//         success: function(label, element) {},
-//         highlight: function(element, errorClass, validClass) {
-//             $(element).addClass("is-invalid").removeClass("is-valid");
-//         },
-//         unhighlight: function(element, errorClass, validClass) {
-//             $(element).addClass("is-valid").removeClass("is-invalid");
-//         }
-
-
-
-
-
-
-//     });
-
-
-
-
-// });
-
-
-
-
-
-</script>
 
 </body>
 </html>
